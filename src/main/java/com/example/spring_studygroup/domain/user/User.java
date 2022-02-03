@@ -25,6 +25,7 @@ public class User {
     private String password;
     private String name;
     private String email;
+    private String phone;
 
     private String role; // 권한
 
