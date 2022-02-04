@@ -45,7 +45,7 @@ public class AuthService {
             introStudy.setProjectIntro("프로젝트 소개를 작성해주세요.");
             introStudy.setProjectTitle("프로젝트 제목을 작성해주세요.");
             introStudy.setTeamIntro("팀 소개를 작성해주세요.");
-            introStudy.setTeamName("팀 이름을 작성해주세요.");
+            introStudy.setTeamName(team.getName());
             introStudy.setTeam(team);
             introStudyRepository.save(introStudy);
             team.setIntroStudy(introStudy);
