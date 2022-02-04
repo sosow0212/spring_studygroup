@@ -1,5 +1,6 @@
 package com.example.spring_studygroup.domain.team;
 
+import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.user.User;
 import lombok.*;
 
@@ -22,6 +23,6 @@ public class Team {
     private String name; // 팀이름
 
     @OneToMany(mappedBy = "team")
-    private List<User> users = new ArrayList<>();
+    private List<Link> users = new ArrayList<>();
 
 }

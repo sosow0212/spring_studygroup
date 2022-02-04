@@ -1,5 +1,7 @@
 package com.example.spring_studygroup.service;
 
+import com.example.spring_studygroup.domain.Link.Link;
+import com.example.spring_studygroup.domain.Link.LinkRepository;
 import com.example.spring_studygroup.domain.team.Team;
 import com.example.spring_studygroup.domain.team.TeamRepository;
 import com.example.spring_studygroup.domain.user.User;
@@ -16,6 +18,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TeamRepository teamRepository;
+    private final LinkRepository linkRepository;
 
     @Transactional // Write(Insert, Update, Delete)
     public void signup(User user, String teamName) {
@@ -24,15 +27,19 @@ public class AuthService {
         user.setPassword(encPassword);
         user.setRole("ROLE_USER");
 
+        Link link = new Link();
+        link.setUser(user);
+
         if(teamRepository.findByName(teamName) == null) {
             Team team = new Team();
             team.setName(teamName);
             teamRepository.save(team);
-        } // 널 값이면 팀을 만듬
+            link.setTeam(team);
+        } else {
+            link.setTeam(teamRepository.findByName(teamName));
+        }
 
-        Team team = teamRepository.findByName(teamName);
-        user.setTeam(team);
-
+        linkRepository.save(link);
         User userEntity = userRepository.save(user);
     }
 }
