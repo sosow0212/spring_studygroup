@@ -47,14 +47,17 @@
 
     <!-- Experience-->
     <section class="resume-section" id="experience">
-        <form th:action="@{/main/intro/{teamId}/edit(id=${team.id})}" method="post" enctype="multipart/form-data" class="resume-section-content">
+        <form th:action="@{/main/intro/{teamId}/edit(teamId=${team.id})}" method="post" enctype="multipart/form-data" class="resume-section-content">
             <h2 class="mb-5">스터디 소개 수정</h2>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">스터디명</h3>
-                    <input type="text" class="subheading mb-3" placeholder="팀 이름을 입력하세요.">
-                    <input type="text" placeholder="팀 소개를 입력하세요.">
+                    <label for="teamName" class="form-label">팀 이름</label>
+                    <input id="teamName" name="teamName" type="text" class="subheading mb-3" th:placeholder="${team.getIntroStudy().getTeamName()}">
+
+                    <label for="teamIntro" class="form-label">팀 소개</label>
+                    <input id="teamIntro" name="teamIntro" type="text" th:placeholder="${team.getIntroStudy().getTeamIntro()}">
                 </div>
 
                 <div class="flex-shrink-0"><span class="text-primary">스터디명</span></div>
@@ -62,8 +65,12 @@
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">프로젝트 제목</h3>
-                    <input type="text" class="subheading mb-3" placeholder="프로젝트 제목을 입력하세요.">
-                    <input type="text" placeholder="프로젝트 소개를 작성하세요.">
+
+                    <label for="projectTitle" class="form-label">프로젝트 제목</label>
+                    <input id="projectTitle", name="projectTitle" type="text" class="subheading mb-3" th:placeholder="${team.getIntroStudy().getProjectTitle()}">
+
+                    <label for="projectIntro" class="form-label">프로젝트 소개</label>
+                    <input id="projectIntro" name="projectIntro" type="text" th:placeholder="${team.getIntroStudy().getProjectIntro()}">
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">프로젝트 개요</span></div>
             </div>

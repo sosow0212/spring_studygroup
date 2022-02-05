@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IntroStudyRepository extends JpaRepository<IntroStudy, Integer> {
+    IntroStudy findById(int id);
 }
