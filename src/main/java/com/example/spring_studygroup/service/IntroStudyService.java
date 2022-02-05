@@ -17,7 +17,6 @@ public class IntroStudyService {
         Team team = teamRepository.findById(teamId);
         IntroStudy orig = introStudyRepository.findById(team.getIntroStudy().getId());
 
-        orig.setTeamName(introStudy.getTeamName());
         orig.setTeamIntro(introStudy.getTeamIntro());
         orig.setProjectTitle(introStudy.getProjectTitle());
         orig.setProjectIntro(introStudy.getProjectIntro());

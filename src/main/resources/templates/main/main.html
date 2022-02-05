@@ -45,12 +45,12 @@
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">스터디 소개</h2>
+                    <h2 class="mb-5">팀 소개</h2>
                     <div class="flex-shrink-0"><a th:href="@{/main/intro/{teamId}/edit(teamId=${link.team.id})}" class="text-primary">소개 수정</a></div>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">스터디명</h3>
-                            <div class="subheading mb-3" th:text="${link.getTeam().getIntroStudy().getTeamName()}">미스터 개발왕</div>
+                            <h3 class="mb-2">팀명</h3>
+                            <div class="subheading mb-3" th:text="${team.name}">미스터 개발왕</div>
                             <p th:text="${link.getTeam().getIntroStudy().getTeamIntro()}">팀을 소개해주시면 됩니다.</p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">스터디명</span></div>
