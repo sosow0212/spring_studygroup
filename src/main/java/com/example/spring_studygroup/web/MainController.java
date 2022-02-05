@@ -4,6 +4,7 @@ import com.example.spring_studygroup.config.auth.PrincipalDetails;
 import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.introStudy.IntroStudy;
 import com.example.spring_studygroup.domain.team.Team;
+import com.example.spring_studygroup.domain.tech.Tech;
 import com.example.spring_studygroup.domain.todo.Todo;
 import com.example.spring_studygroup.domain.user.User;
 import com.example.spring_studygroup.service.*;
@@ -35,11 +36,13 @@ public class MainController {
         Team team = link.getTeam();
         User user = principalDetails.getUser();
         List<Todo> todos = todoService.findAllTodo(team.getId());
+        List<Tech> techs = techService.loadTechs(team);
 
         model.addAttribute("link", link);
         model.addAttribute("user", user);
         model.addAttribute("team", team);
         model.addAttribute("todos", todos);
+        model.addAttribute("techs", techs);
         return "/main/main";
     }
 

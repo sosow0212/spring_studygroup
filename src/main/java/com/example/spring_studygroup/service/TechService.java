@@ -18,6 +18,14 @@ public class TechService {
             return;
         }
 
+        // null 값이 아니라면 기존 기술스택은 싹 다 지우고 새로 저장함
+        List<Tech> techs = techRepository.findAllByTeam(team);
+        for(Tech tech : techs) {
+            techRepository.delete(tech);
+        }
+
+
+        // 받아온 값을 새로 저장함
         for(String c : checkedValue) {
             Tech tech = new Tech();
             tech.setTeam(team);
@@ -25,5 +33,11 @@ public class TechService {
             techRepository.save(tech);
             System.out.println(tech.getName());
         }
+    }
+
+
+    public List<Tech> loadTechs(Team team) {
+        List<Tech> techs = techRepository.findAllByTeam(team);
+        return techs;
     }
 }
