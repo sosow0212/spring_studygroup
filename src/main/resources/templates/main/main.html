@@ -35,10 +35,13 @@
                 </ul>
             </div>
         </nav>
+
+
+
+
+
         <!-- Page Content-->
         <div class="container-fluid p-0">
-            <!-- About-->
-
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
@@ -64,23 +67,46 @@
                 </div>
             </section>
             <hr class="m-0" />
-            <!-- Education-->
+
+
+
+
+
+            <!-- todoList -->
             <section class="resume-section" id="education">
                 <div class="resume-section-content">
                     <h2 class="mb-5">할 일 목록</h2>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">할일 1</h3>
-                            <div class="subheading mb-3">내용</div>
-                            <div>서버 개발하기</div>
-                            <p>백엔드</p>
+                            <h3 class="mb-0">What to do in the morning?!</h3>
+                            <div class="subheading mb-3">Make your list</div>
+
+                            <tr>
+                                <th>List</th>
+                            </tr>
+                            <tr th:each="todo : ${todos}">
+                                <li th:text="${todo.content}">write something</li>
+                            </tr>
+
                         </div>
-                        <div class="flex-shrink-0"><span class="text-primary">TodoList 생성 일자</span></div>
+
+                        <form th:action="@{/main/todo/{teamId}(teamId=${team.id})}" method="post" enctype="multipart/form-data" class="flex-shrink-0">
+                            <div>
+                                <label class="text-primary" for="content">목록 생성</label>
+                                <input id="content" name="content" type="text" placeholder="Write what to do">
+                                <button type="submit">작성</button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
             </section>
             <hr class="m-0" />
+
+
+
+
+
             <!-- Skills-->
             <section class="resume-section" id="skills">
                 <div class="resume-section-content">
@@ -122,6 +148,12 @@
                 </div>
             </section>
             <hr class="m-0" />
+
+
+
+
+
+
             <!-- Interests-->
             <section class="resume-section" id="interests">
                 <div class="resume-section-content">

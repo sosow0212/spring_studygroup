@@ -51,6 +51,10 @@ public class AuthService {
             team.setIntroStudy(introStudy);
             // introStudy 생성 종료
 
+            // TodoList 생성
+
+            // TodoList 생성 종료
+
             teamRepository.save(team);
             link.setTeam(team);
         } else {
