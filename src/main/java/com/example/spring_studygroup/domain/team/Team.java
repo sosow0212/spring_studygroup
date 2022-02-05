@@ -2,6 +2,7 @@ package com.example.spring_studygroup.domain.team;
 
 import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.introStudy.IntroStudy;
+import com.example.spring_studygroup.domain.todo.Todo;
 import com.example.spring_studygroup.domain.user.User;
 import lombok.*;
 
@@ -30,5 +31,8 @@ public class Team {
 
     @OneToMany(mappedBy = "team")
     private List<Link> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "team")
+    private List<Todo> todos = new ArrayList<>();
 
 }
