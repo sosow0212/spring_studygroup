@@ -6,10 +6,7 @@ import com.example.spring_studygroup.domain.introStudy.IntroStudy;
 import com.example.spring_studygroup.domain.team.Team;
 import com.example.spring_studygroup.domain.todo.Todo;
 import com.example.spring_studygroup.domain.user.User;
-import com.example.spring_studygroup.service.IntroStudyService;
-import com.example.spring_studygroup.service.LinkService;
-import com.example.spring_studygroup.service.TeamService;
-import com.example.spring_studygroup.service.TodoService;
+import com.example.spring_studygroup.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -28,6 +26,7 @@ public class MainController {
     private final TeamService teamService;
     private final IntroStudyService introStudyService;
     private final TodoService todoService;
+    private final TechService techService;
 
     @GetMapping("/main")
     public String mainPage(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
@@ -82,7 +81,17 @@ public class MainController {
         Team team = teamService.findById(teamId);
         model.addAttribute("team", team);
         model.addAttribute("user", principalDetails.getUser());
-
         return "/main/addTechStack";
+    }
+
+
+    @PostMapping("/main/stack/{teamId}")
+    public String addStackProcess(@PathVariable("teamId") Integer teamId, @RequestParam List<String> checkedValue) {
+
+        Team team = teamService.findById(teamId);
+
+        techService.saveTech(checkedValue, team);
+
+        return "redirect:/main#skills";
     }
 }

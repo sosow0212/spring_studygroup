@@ -47,31 +47,24 @@
 
     <!-- Experience-->
     <section class="resume-section" id="experience">
-        <form th:action="@{/main/intro/{teamId}/edit(teamId=${team.id})}" method="post" enctype="multipart/form-data" class="resume-section-content">
-            <h2 class="mb-5">스터디 소개 수정</h2>
+        <form th:action="@{/main/stack/{teamId}(teamId=${team.id})}" method="post" enctype="multipart/form-data" class="resume-section-content">
+            <h2 class="mb-5">기술스택 수정</h2>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <label for="teamIntro" class="form-label">팀 소개</label>
-                    <input id="teamIntro" name="teamIntro" type="text" th:placeholder="${team.getIntroStudy().getTeamIntro()}">
+                    <label for="html" class="form-label">html</label>
+                    <input id="html" name="checkedValue" type="checkbox" value="html">
+
+                    <label for="css" class="form-label">css</label>
+                    <input id="css" name="checkedValue" type="checkbox" value="css">
+
+                    <label for="js" class="form-label">js</label>
+                    <input id="js" name="checkedValue" type="checkbox" value="js">
                 </div>
-
-                <div class="flex-shrink-0"><span class="text-primary">스터디명</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">프로젝트 제목</h3>
-
-                    <label for="projectTitle" class="form-label">프로젝트 제목</label>
-                    <input id="projectTitle", name="projectTitle" type="text" class="subheading mb-3" th:placeholder="${team.getIntroStudy().getProjectTitle()}">
-
-                    <label for="projectIntro" class="form-label">프로젝트 소개</label>
-                    <input id="projectIntro" name="projectIntro" type="text" th:placeholder="${team.getIntroStudy().getProjectIntro()}">
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">프로젝트 개요</span></div>
+                <div class="flex-shrink-0"><span class="text-primary">기술스택 체크</span></div>
             </div>
 
-            <button class="mb-5 text-primary" type="submit">수정하기</button>
+            <button class="mb-5 text-primary" type="submit">추가하기</button>
         </form>
     </section>
 </div>
