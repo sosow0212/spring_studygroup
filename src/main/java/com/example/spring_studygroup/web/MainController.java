@@ -64,6 +64,8 @@ public class MainController {
     }
 
 
+
+    // 투두리스트 처리
     @PostMapping("/main/todo/{teamId}")
     public String makeTodo(@PathVariable("teamId") Integer teamId, String content) {
         System.out.println(content);
@@ -71,4 +73,16 @@ public class MainController {
         return "redirect:/main#education";
     }
 
+
+
+    // 기술스택 추가하기
+    @GetMapping("/main/stack/{teamId}")
+    public String addStack(@PathVariable("teamId") Integer teamId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+
+        Team team = teamService.findById(teamId);
+        model.addAttribute("team", team);
+        model.addAttribute("user", principalDetails.getUser());
+
+        return "/main/addTechStack";
+    }
 }
