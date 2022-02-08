@@ -2,6 +2,7 @@ package com.example.spring_studygroup.web;
 
 import com.example.spring_studygroup.config.auth.PrincipalDetails;
 import com.example.spring_studygroup.domain.Link.Link;
+import com.example.spring_studygroup.domain.board.Board;
 import com.example.spring_studygroup.domain.introStudy.IntroStudy;
 import com.example.spring_studygroup.domain.team.Team;
 import com.example.spring_studygroup.domain.tech.Tech;
@@ -28,6 +29,7 @@ public class MainController {
     private final IntroStudyService introStudyService;
     private final TodoService todoService;
     private final TechService techService;
+    private final BoardService boardService;
 
     @GetMapping("/main")
     public String mainPage(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
@@ -37,12 +39,14 @@ public class MainController {
         User user = principalDetails.getUser();
         List<Todo> todos = todoService.findAllTodo(team.getId());
         List<Tech> techs = techService.loadTechs(team);
+        List<Board> boards = boardService.findAllBoardByTeam(team);
 
         model.addAttribute("link", link);
         model.addAttribute("user", user);
         model.addAttribute("team", team);
         model.addAttribute("todos", todos);
         model.addAttribute("techs", techs);
+        model.addAttribute("boards", boards);
         return "/main/main";
     }
 
