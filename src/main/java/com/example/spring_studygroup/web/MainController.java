@@ -76,7 +76,7 @@ public class MainController {
     public String makeTodo(@PathVariable("teamId") Integer teamId, String content) {
         System.out.println(content);
         todoService.saveTodo(content, teamService.findById(teamId));
-        return "redirect:/main#education";
+        return "redirect:/main#todo";
     }
 
 
@@ -100,5 +100,25 @@ public class MainController {
         techService.saveTech(checkedValue, team);
 
         return "redirect:/main#skills";
+    }
+
+
+    // 게시글 업로드 페이지
+    @GetMapping("/main/board/write/{teamId}")
+    public String boardWriteForm(@PathVariable("teamId") Integer teamId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        User user = principalDetails.getUser();
+        Team team = teamService.findById(teamId);
+        model.addAttribute("user", user);
+        model.addAttribute("team", team);
+        return "/main/boardUploadPage";
+    }
+
+    @PostMapping("/main/board/write/{teamId}")
+    public String boardWriteProcess(@AuthenticationPrincipal PrincipalDetails principalDetails ,@PathVariable Integer teamId, Board board) {
+        User user = principalDetails.getUser();
+        Team team = teamService.findById(teamId);
+        boardService.writeBoard(board, team, user);
+        return "redirect:/main#board";
+
     }
 }

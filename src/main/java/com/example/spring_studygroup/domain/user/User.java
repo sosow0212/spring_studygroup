@@ -1,6 +1,7 @@
 package com.example.spring_studygroup.domain.user;
 
 import com.example.spring_studygroup.domain.Link.Link;
+import com.example.spring_studygroup.domain.board.Board;
 import com.example.spring_studygroup.domain.team.Team;
 import lombok.*;
 
@@ -32,6 +33,9 @@ public class User {
 
     @OneToMany(mappedBy = "team")
     private List<Link> links = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board")
+    private List<Board> boards = new ArrayList<>();
 
     private LocalDateTime createDate; // 날짜
 

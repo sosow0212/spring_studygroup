@@ -2,6 +2,7 @@ package com.example.spring_studygroup.domain.board;
 
 import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.team.Team;
+import com.example.spring_studygroup.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,10 @@ public class Board {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private LocalDateTime createDate; // 날짜
 
