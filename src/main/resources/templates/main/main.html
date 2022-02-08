@@ -153,92 +153,93 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="board, i : ${boards}">
-                    <th scope="row" th:text="${i.count}">1</th>
-                    <td>
-                        <p id="show" th:text="${board.title}">제목</p>
-                        <div th:class="background">
-                            <div th:class="window">
-                                <div th:class="popup">
-                                    <button th:id="close">팝업닫기</button>
-                                    <div class="col-md-8">
-                                        <div class="d-flex flex-column comment-section">
-                                            <div class="bg-white p-2">
-                                                <div class="d-flex flex-row user-info mb-3"><img class="rounded-circle"
-                                                                                                 src="https://i.imgur.com/RpzrMR2.jpg"
-                                                                                                 width="40">
-                                                    <div class="d-flex flex-column justify-content-start ml-2">
-                                                                <span class="d-block font-weight-bold name"
-                                                                      th:text="${board.writer}">작성자</span><span
-                                                            class="date text-black-50"
-                                                            th:text="${board.createDate}">날짜</span></div>
+                    <tr th:each="board, i : ${boards}">
+                        <th scope="row" th:text="${i.count}">1</th>
+                        <td>
+                            <p id="show" th:text="${board.title}">제목</p>
+                            <div class="background">
+                                <div class="window">
+                                    <div class="popup">
+                                        <button th:id="close">팝업닫기</button>
+                                        <div class="col-md-8">
+                                            <div class="d-flex flex-column comment-section">
+                                                <div class="bg-white p-2">
+                                                    <div class="d-flex flex-row user-info mb-3"><img class="rounded-circle"
+                                                                                                     src="https://i.imgur.com/RpzrMR2.jpg"
+                                                                                                     width="40">
+                                                        <div class="d-flex flex-column justify-content-start ml-2">
+                                                                    <span class="d-block font-weight-bold name"
+                                                                          th:text="${board.writer}">작성자</span><span
+                                                                class="date text-black-50"
+                                                                th:text="${board.createDate}">날짜</span></div>
+                                                    </div>
+                                                    <div class="mt-2">
+                                                        <h3 class="comment-text" th:text="${board.title}">게시글 제목
+                                                        </h3>
+                                                        <hr>
+                                                        <p class="comment-text" th:text="${board.content}">게시글 내용
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="mt-2">
-                                                    <h3 class="comment-text" th:text="${board.title}">게시글 제목
-                                                    </h3>
+
+                                                <div class="bg-white">
+                                                    <div class="d-flex flex-row fs-12">
+                                                        <div class="like p-2 cursor"><i
+                                                                class="fa fa-thumbs-o-up"></i><span
+                                                                class="ml-1">Like</span>
+                                                        </div>
+                                                        <div class="like p-2 cursor"><i
+                                                                class="fa fa-commenting-o"></i><span
+                                                                class="ml-1">Comment</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="bg-light p-2">
+                                                    <form id="commentForm" class="d-flex flex-row align-items-start"
+                                                          th:action="@{/board/{boardId}/comment/{userId}(boardId=${board.id}, userId=${user.id})}"
+                                                          method="post">
+                                                        <img class="rounded-circle"
+                                                             src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                                        <textarea name="text" id="text"
+                                                                  class="form-control ml-1 shadow-none textarea"></textarea>
+                                                    </form>
+
+                                                    <div class="mt-2 text-right">
+                                                        <button class="btn btn-primary btn-sm shadow-none"
+                                                                type="submit" form="commentForm">Post comment
+                                                        </button>
+                                                        <a class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+                                                           th:href="@{/}">Cancel</a>
+                                                    </div>
+
                                                     <hr>
-                                                    <p class="comment-text" th:text="${board.content}">게시글 내용
-                                                    </p>
+                                                    <!--      댓글         -->
+                                                    <!--                                                            <div class="d-flex flex-row align-items-start"-->
+                                                    <!--                                                                 th:each="comment : ${comments}">-->
+                                                    <!--                                                                <div class="mt-2">-->
+                                                    <!--                                                                    <hr>-->
+                                                    <!--                                                                    <p class="comment-text"-->
+                                                    <!--                                                                       th:text="${comment.getUser().getName()}">댓글 작성자</p>-->
+                                                    <!--                                                                    <p class="comment-text"-->
+                                                    <!--                                                                       th:text="${comment.getCreateDate()}">댓글 날짜</p>-->
+                                                    <!--                                                                    <p class="comment-text" th:text="${comment.getText()}">-->
+                                                    <!--                                                                        댓글 내용</p>-->
+                                                    <!--                                                                </div>-->
+                                                    <!--                                                            </div>-->
                                                 </div>
-                                            </div>
-
-                                            <div class="bg-white">
-                                                <div class="d-flex flex-row fs-12">
-                                                    <div class="like p-2 cursor"><i
-                                                            class="fa fa-thumbs-o-up"></i><span
-                                                            class="ml-1">Like</span>
-                                                    </div>
-                                                    <div class="like p-2 cursor"><i
-                                                            class="fa fa-commenting-o"></i><span
-                                                            class="ml-1">Comment</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="bg-light p-2">
-                                                <form id="commentForm" class="d-flex flex-row align-items-start"
-                                                      th:action="@{/board/{boardId}/comment/{userId}(boardId=${board.id}, userId=${user.id})}"
-                                                      method="post">
-                                                    <img class="rounded-circle"
-                                                         src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                                    <textarea name="text" id="text"
-                                                              class="form-control ml-1 shadow-none textarea"></textarea>
-                                                </form>
-
-                                                <div class="mt-2 text-right">
-                                                    <button class="btn btn-primary btn-sm shadow-none"
-                                                            type="submit" form="commentForm">Post comment
-                                                    </button>
-                                                    <a class="btn btn-outline-primary btn-sm ml-1 shadow-none"
-                                                       th:href="@{/}">Cancel</a>
-                                                </div>
-
-                                                <hr>
-                                                <!--      댓글         -->
-                                                <!--                                                            <div class="d-flex flex-row align-items-start"-->
-                                                <!--                                                                 th:each="comment : ${comments}">-->
-                                                <!--                                                                <div class="mt-2">-->
-                                                <!--                                                                    <hr>-->
-                                                <!--                                                                    <p class="comment-text"-->
-                                                <!--                                                                       th:text="${comment.getUser().getName()}">댓글 작성자</p>-->
-                                                <!--                                                                    <p class="comment-text"-->
-                                                <!--                                                                       th:text="${comment.getCreateDate()}">댓글 날짜</p>-->
-                                                <!--                                                                    <p class="comment-text" th:text="${comment.getText()}">-->
-                                                <!--                                                                        댓글 내용</p>-->
-                                                <!--                                                                </div>-->
-                                                <!--                                                            </div>-->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
-                    <td th:text="${board.writer}">이재윤</td>
-                    <td th:text="${board.createDate}">2022-02-01</td>
-                </tr>
+                        </td>
+                        <td th:text="${board.writer}">이재윤</td>
+                        <td th:text="${board.createDate}">2022-02-01</td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
     </section>
     <hr class="m-0"/>
 

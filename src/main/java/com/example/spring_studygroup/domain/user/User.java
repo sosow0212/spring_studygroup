@@ -34,7 +34,7 @@ public class User {
     @OneToMany(mappedBy = "team")
     private List<Link> links = new ArrayList<>();
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "user")
     private List<Board> boards = new ArrayList<>();
 
     private LocalDateTime createDate; // 날짜
