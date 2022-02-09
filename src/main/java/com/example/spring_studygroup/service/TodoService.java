@@ -27,4 +27,14 @@ public class TodoService {
         todo.setState("미완료");
         todoRepository.save(todo);
     }
+
+    public void doneTodo(int todoId) {
+        Todo todo = todoRepository.findById(todoId);
+        todo.setState("완성");
+        todoRepository.save(todo);
+    }
+
+    public void deleteTodo(int todoId) {
+        todoRepository.deleteById(todoId);
+    }
 }

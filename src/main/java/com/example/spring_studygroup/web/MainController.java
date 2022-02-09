@@ -79,7 +79,28 @@ public class MainController {
         return "redirect:/main#todo";
     }
 
+    // 투두리스트 완료
+    @GetMapping("/main/todo/done/{teamId}/{todoId}")
+    public String doneTodo(@AuthenticationPrincipal PrincipalDetails principalDetails ,@PathVariable("teamId") Integer teamId, @PathVariable("todoId") Integer todoId) {
+        User user = principalDetails.getUser();
+        Team team = teamService.findById(teamId);
+        if(linkService.findByUser(user).getTeam() != team) {
+            return "redirect:/main#todo";
+        }
+        todoService.doneTodo(todoId);
+        return "redirect:/main#todo";
+    }
 
+    @GetMapping("/main/todo/delete/{teamId}/{todoId}")
+    public String deleteTodo(@AuthenticationPrincipal PrincipalDetails principalDetails ,@PathVariable("teamId") Integer teamId, @PathVariable("todoId") Integer todoId) {
+        User user = principalDetails.getUser();
+        Team team = teamService.findById(teamId);
+        if(linkService.findByUser(user).getTeam() != team) {
+            return "redirect:/main#todo";
+        }
+        todoService.deleteTodo(todoId);
+        return "redirect:/main#todo";
+    }
 
     // 기술스택 추가하기
     @GetMapping("/main/stack/{teamId}")
@@ -91,16 +112,15 @@ public class MainController {
         return "/main/addTechStack";
     }
 
-
+    // 기술스택 추가
     @PostMapping("/main/stack/{teamId}")
     public String addStackProcess(@PathVariable("teamId") Integer teamId, @RequestParam List<String> checkedValue) {
 
         Team team = teamService.findById(teamId);
-
         techService.saveTech(checkedValue, team);
-
         return "redirect:/main#skills";
     }
+
 
 
     // 게시글 업로드 페이지
