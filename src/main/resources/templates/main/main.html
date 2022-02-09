@@ -16,6 +16,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/todo.css">
 
 </head>
 <body id="page-top">
@@ -85,12 +86,20 @@
                     <h3 class="mb-0">What to do in the morning?!</h3>
                     <div class="subheading mb-3">Make your list</div>
 
-                    <tr>
-                        <th>List</th>
-                    </tr>
-                    <tr th:each="todo : ${todos}">
-                        <li th:text="${todo.content}">write something</li>
-                    </tr>
+
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
+                            <div class="ms-3">
+                                <h4 class="text-uppercase fw-weight-bold mb-0">To do list</h4>
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-3" th:each="todo : ${todos}">
+                            <input class="form-check-input" th:id="|flexCheck${todo.id}|" type="checkbox">
+                            <label class="form-check-label" th:for="|flexCheck${todo.id}|"><span th:text="${todo.content}" class="fst-italic pl-1">list</span></label>
+                        </div>
+                    </div>
+
 
                 </div>
 
