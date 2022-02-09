@@ -169,7 +169,7 @@
                 <tbody>
                     <tr th:each="board, i : ${boards}">
                         <th scope="row" th:text="${i.count}">1</th>
-                        <td>
+                        <td class="modalClass">
                             <p class="show"  th:text="${board.title}">제목</p>
                             <div class="background">
                                 <div class="window">
@@ -241,7 +241,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
+                        </td >
                         <td th:text="${board.writer}">이재윤</td>
                         <td th:text="${board.createDate}">2022-02-01</td>
                     </tr>
