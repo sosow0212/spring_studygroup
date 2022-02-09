@@ -94,6 +94,14 @@
                             </div>
                         </div>
 
+                        <form th:action="@{/main/todo/{teamId}(teamId=${team.id})}" method="post" enctype="multipart/form-data"
+                              class="flex-shrink-0">
+                            <div>
+                                <label class="text-primary" for="content">목록 생성</label>
+                                <input id="content" name="content" type="text" placeholder="Write what to do">
+                                <button class="btn btn-primary" type="submit">작성</button>
+                            </div>
+                        </form>
                         <div class="form-check mb-3" th:each="todo : ${todos}">
                             <input class="form-check-input" th:id="|flexCheck${todo.id}|" type="checkbox">
                             <label class="form-check-label" th:for="|flexCheck${todo.id}|"><span th:text="${todo.content}" class="fst-italic pl-1">list</span></label>
@@ -102,15 +110,6 @@
 
 
                 </div>
-
-                <form th:action="@{/main/todo/{teamId}(teamId=${team.id})}" method="post" enctype="multipart/form-data"
-                      class="flex-shrink-0">
-                    <div>
-                        <label class="text-primary" for="content">목록 생성</label>
-                        <input id="content" name="content" type="text" placeholder="Write what to do">
-                        <button type="submit">작성</button>
-                    </div>
-                </form>
             </div>
 
         </div>
