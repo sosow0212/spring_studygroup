@@ -106,8 +106,9 @@
                             <input class="form-check-input" th:id="|flexCheck${todo.id}|" type="checkbox">
                             <label class="form-check-label" th:for="|flexCheck${todo.id}|"><span th:text="${todo.content}" class="fst-italic pl-1">list</span></label>
                             <div>
-                                <p th:if="${todo.state.equals('완성')}">완료된 항목</p>
-                                <a th:if="${todo.state.equals('미완성')}" th:href="@{/main/todo/done/{teamId}/{todoId}(teamId=${team.id}, todoId=${todo.id})}">완료</a>
+                                <p th:if="${todo.state.equals('완료')}">완료된 항목</p>
+
+                                <a th:if="${todo.state.equals('미완료')}" th:href="@{/main/todo/done/{teamId}/{todoId}(teamId=${team.id}, todoId=${todo.id})}">완료</a>
                                 <a th:href="@{/main/todo/delete/{teamId}/{todoId}(teamId=${team.id}, todoId=${todo.id})}">삭제</a>
                             </div>
                         </div>

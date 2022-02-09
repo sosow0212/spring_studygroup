@@ -30,7 +30,7 @@ public class TodoService {
 
     public void doneTodo(int todoId) {
         Todo todo = todoRepository.findById(todoId);
-        todo.setState("완성");
+        todo.setState("완료");
         todoRepository.save(todo);
     }
 
