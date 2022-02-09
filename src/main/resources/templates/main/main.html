@@ -164,6 +164,7 @@
                     <th scope="col">제목</th>
                     <th scope="col">글쓴이</th>
                     <th scope="col">날짜</th>
+                    <th scope="col">옵션</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -244,6 +245,21 @@
                         </td >
                         <td th:text="${board.writer}">이재윤</td>
                         <td th:text="${board.createDate}">2022-02-01</td>
+                        <td th:if="${user.getId()} == ${board.getUser().getId()}">
+                            <a th:href="@{/main/board/edit/{teamId}/{boardId}(teamId=${team.id}, boardId=${board.id})}">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    수정
+                                </button>
+                            </a>
+                            <a th:href="@{/main/board/edit/{boardId}(boardId = ${board.id})}">
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    삭제
+                                </button>
+                            </a>
+                        </td>
+                        <td th:unless="${user.getId()} == ${board.getUser().getId()}">
+                            <p> </p>
+                        </td>
                     </tr>
                 </tbody>
             </table>

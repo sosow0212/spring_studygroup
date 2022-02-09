@@ -51,7 +51,6 @@ public class MainController {
     }
 
 
-
     // 팀소개 수정
     @GetMapping("/main/intro/{teamId}/edit")
     public String introStudyEdit(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model, @PathVariable("teamId") Integer teamId) {
@@ -64,11 +63,10 @@ public class MainController {
     }
 
     @PostMapping("/main/intro/{teamId}/edit")
-    public String introStudyEditProcess(@PathVariable("teamId") Integer teamId , IntroStudy introStudy) {
+    public String introStudyEditProcess(@PathVariable("teamId") Integer teamId, IntroStudy introStudy) {
         introStudyService.saveIntro(teamId, introStudy);
         return "redirect:/main";
     }
-
 
 
     // 투두리스트 처리
@@ -81,10 +79,10 @@ public class MainController {
 
     // 투두리스트 완료
     @GetMapping("/main/todo/done/{teamId}/{todoId}")
-    public String doneTodo(@AuthenticationPrincipal PrincipalDetails principalDetails ,@PathVariable("teamId") Integer teamId, @PathVariable("todoId") Integer todoId) {
+    public String doneTodo(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("teamId") Integer teamId, @PathVariable("todoId") Integer todoId) {
         User user = principalDetails.getUser();
         Team team = teamService.findById(teamId);
-        if(linkService.findByUser(user).getTeam() != team) {
+        if (linkService.findByUser(user).getTeam() != team) {
             return "redirect:/main#todo";
         }
         todoService.doneTodo(todoId);
@@ -92,10 +90,10 @@ public class MainController {
     }
 
     @GetMapping("/main/todo/delete/{teamId}/{todoId}")
-    public String deleteTodo(@AuthenticationPrincipal PrincipalDetails principalDetails ,@PathVariable("teamId") Integer teamId, @PathVariable("todoId") Integer todoId) {
+    public String deleteTodo(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("teamId") Integer teamId, @PathVariable("todoId") Integer todoId) {
         User user = principalDetails.getUser();
         Team team = teamService.findById(teamId);
-        if(linkService.findByUser(user).getTeam() != team) {
+        if (linkService.findByUser(user).getTeam() != team) {
             return "redirect:/main#todo";
         }
         todoService.deleteTodo(todoId);
@@ -122,10 +120,9 @@ public class MainController {
     }
 
 
-
     // 게시글 업로드 페이지
     @GetMapping("/main/board/write/{teamId}")
-    public String boardWriteForm(@PathVariable("teamId") Integer teamId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+    public String boardWritePage(@PathVariable("teamId") Integer teamId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         User user = principalDetails.getUser();
         Team team = teamService.findById(teamId);
         model.addAttribute("user", user);
@@ -134,11 +131,38 @@ public class MainController {
     }
 
     @PostMapping("/main/board/write/{teamId}")
-    public String boardWriteProcess(@AuthenticationPrincipal PrincipalDetails principalDetails ,@PathVariable Integer teamId, Board board) {
+    public String boardWriteProcess(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Integer teamId, Board board) {
         User user = principalDetails.getUser();
         Team team = teamService.findById(teamId);
         boardService.writeBoard(board, team, user);
         return "redirect:/main#board";
+    }
 
+    // 게시글 수정
+    @GetMapping("/main/board/edit/{teamId}/{boardId}")
+    public String boardEditPage(@PathVariable("teamId") Integer teamId, @PathVariable("boardId") Integer boardId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        User user = principalDetails.getUser();
+        Board board = boardService.findBoardById(boardId);
+        Team team = teamService.findById(teamId);
+
+        model.addAttribute("board", board);
+        model.addAttribute("team", team);
+        model.addAttribute("user", user);
+        return "main/boardEditPage";
+    }
+
+    @PostMapping("/main/board/edit/{teamId}/{boardId}")
+    public String boardEditPage(@PathVariable("teamId") Integer teamId, @PathVariable("boardId") Integer boardId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model, Board board) {
+        boardService.editBoard(boardId, board);
+        return "redirect:/main#board";
+    }
+
+    // 게시글 삭제
+    @GetMapping("/main/board/edit/{boardId}")
+    public String boardDelete(@PathVariable("boardId") Integer boardId) {
+        Board board = boardService.findBoardById(boardId);
+        boardService.boardDelete(board);
+        return "redirect:/main#board";
     }
 }
+

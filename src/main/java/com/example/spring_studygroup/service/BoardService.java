@@ -20,6 +20,23 @@ public class BoardService {
 
     public void writeBoard(Board board, Team team, User user) {
         board.setTeam(team);
+        board.setUser(user);
         boardRepository.save(board);
+    }
+
+    public Board findBoardById(int boardId) {
+
+        return boardRepository.findById(boardId);
+    }
+
+    public void editBoard(int boardId, Board board) {
+        Board before = boardRepository.findById(boardId);
+        before.setContent(board.getContent());
+        before.setTitle(board.getTitle());
+        boardRepository.save(board);
+    }
+
+    public void boardDelete(Board board) {
+        boardRepository.delete(board);
     }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>게시글 작성가</title>
+    <title>게시글 수정</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
@@ -47,19 +47,19 @@
 
     <!-- Experience-->
     <section class="resume-section" id="experience">
-        <form th:action="@{/main/board/write/{teamId}(teamId=${team.id})}" method="post" enctype="multipart/form-data" class="resume-section-content">
-            <h2 class="mb-5">게시글 업로드</h2>
+        <form th:action="@{/main/board/edit/{teamId}/{boardId}(teamId = ${team.id}, boardId = ${board.id})}" method="post" enctype="multipart/form-data" class="resume-section-content">
+            <h2 class="mb-5">게시글 수정</h2>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <label for="title" class="form-label">제목</label>
-                    <input id="title" name="title" type="input"> <br>
+                    <input id="title" name="title" type="input" th:value="${board.getTitle()}"> <br>
 
                     <label for="writer" class="form-label" readonly="">작성자</label>
                     <input id="writer" name="writer" type="input" th:value="${user.name}"><br>
 
                     <label for="content" class="form-label">내용</label>
-                    <input id="content" name="content" type="input"><br>
+                    <input id="content" name="content" type="input" th:value="${board.getContent()}"><br>
 
                 </div>
                 <div class="flex-shrink-0"><span class="text-primary">기술스택 체크</span></div>
