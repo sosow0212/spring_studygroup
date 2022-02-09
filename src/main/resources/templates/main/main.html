@@ -120,7 +120,7 @@
                                                                           th:id="${tech.getName()}"></i></li>
             </ul>
 
-            <a class="subheading mb-5" th:href="@{/main/board/write}">기술 스택 추가하기</a>
+            <a class="subheading mb-5" th:href="@{/main/stack/{teamId}(teamId = ${team.id})}">기술 스택 추가하기</a>
 
 
             <div class="subheading mb-3">Workflow</div>
@@ -156,29 +156,24 @@
                     <tr th:each="board, i : ${boards}">
                         <th scope="row" th:text="${i.count}">1</th>
                         <td>
-                            <p id="show" th:text="${board.title}">제목</p>
+                            <p class="show"  th:text="${board.title}">제목</p>
                             <div class="background">
                                 <div class="window">
                                     <div class="popup">
-                                        <button th:id="close">팝업닫기</button>
                                         <div class="col-md-8">
                                             <div class="d-flex flex-column comment-section">
                                                 <div class="bg-white p-2">
-                                                    <div class="d-flex flex-row user-info mb-3"><img class="rounded-circle"
-                                                                                                     src="https://i.imgur.com/RpzrMR2.jpg"
-                                                                                                     width="40">
+                                                    <div class="d-flex flex-row user-info mb-3">
+                                                        <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
                                                         <div class="d-flex flex-column justify-content-start ml-2">
-                                                                    <span class="d-block font-weight-bold name"
-                                                                          th:text="${board.writer}">작성자</span><span
-                                                                class="date text-black-50"
-                                                                th:text="${board.createDate}">날짜</span></div>
+                                                            <span class="d-block font-weight-bold name" th:text="${board.writer}">작성자</span>
+                                                            <span class="date text-black-50" th:text="${board.createDate}">날짜</span>
+                                                        </div>
                                                     </div>
                                                     <div class="mt-2">
-                                                        <h3 class="comment-text" th:text="${board.title}">게시글 제목
-                                                        </h3>
+                                                        <h3 class="comment-text" th:text="${board.title}">게시글 제목</h3>
                                                         <hr>
-                                                        <p class="comment-text" th:text="${board.content}">게시글 내용
-                                                        </p>
+                                                        <p class="comment-text" th:text="${board.content}">게시글 내용</p>
                                                     </div>
                                                 </div>
 
@@ -209,8 +204,7 @@
                                                         <button class="btn btn-primary btn-sm shadow-none"
                                                                 type="submit" form="commentForm">Post comment
                                                         </button>
-                                                        <a class="btn btn-outline-primary btn-sm ml-1 shadow-none"
-                                                           th:href="@{/}">Cancel</a>
+                                                        <a class="close btn btn-outline-primary btn-sm ml-1 shadow-none">Cancel</a>
                                                     </div>
 
                                                     <hr>
