@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface AwardRepository extends JpaRepository<Award, Integer> {
     List<Award> findAllByTeam(Team team);
+    Award findAwardById(int id);
 }

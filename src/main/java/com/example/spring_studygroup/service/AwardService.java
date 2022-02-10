@@ -24,4 +24,12 @@ public class AwardService {
         awardRepository.save(newAward);
     }
 
+    public Award findByAwardId(int awardId) {
+        return awardRepository.findAwardById(awardId);
+    }
+
+    public void deleteAward(Award award) {
+        awardRepository.deleteById(award.getId());
+    }
+
 }

@@ -181,5 +181,20 @@ public class MainController {
 
         return "redirect:/main#awards";
     }
+
+    @GetMapping("/main/{teamId}/award/{awardId}/delete")
+    public String awardDelete(@PathVariable("teamId") Integer teamId, @PathVariable("awardId") Integer awardId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Team team = teamService.findById(teamId);
+        User user = principalDetails.getUser();
+
+        Link userLink = linkService.findByUser(user);
+        if(userLink.getTeam() != team) {
+            return "redirect:/main";
+        }
+
+        Award award = awardService.findByAwardId(awardId);
+        awardService.deleteAward(award);
+        return "redirect:/main#awards";
+    }
 }
 

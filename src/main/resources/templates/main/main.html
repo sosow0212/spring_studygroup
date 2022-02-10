@@ -286,6 +286,9 @@
                 <li th:each="award : ${awards}">
                     <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
                     <span th:text="|${award.getAward()} -- ${award.getCreateDate()}|">Google Analytics Certified Developer</span>
+                    <div>
+                        <a th:href="@{/main/{teamId}/award/{awardId}/delete(teamId=${team.id}, awardId=${award.id})}">삭제</a><br>
+                    </div>
                 </li>
             </ul>
         </div>
