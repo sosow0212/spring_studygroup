@@ -2,6 +2,7 @@ package com.example.spring_studygroup.web;
 
 import com.example.spring_studygroup.config.auth.PrincipalDetails;
 import com.example.spring_studygroup.domain.Link.Link;
+import com.example.spring_studygroup.domain.award.Award;
 import com.example.spring_studygroup.domain.board.Board;
 import com.example.spring_studygroup.domain.introStudy.IntroStudy;
 import com.example.spring_studygroup.domain.team.Team;
@@ -30,6 +31,7 @@ public class MainController {
     private final TodoService todoService;
     private final TechService techService;
     private final BoardService boardService;
+    private final AwardService awardService;
 
     @GetMapping("/main")
     public String mainPage(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
@@ -40,6 +42,7 @@ public class MainController {
         List<Todo> todos = todoService.findAllTodo(team.getId());
         List<Tech> techs = techService.loadTechs(team);
         List<Board> boards = boardService.findAllBoardByTeam(team);
+        List<Award> awards = awardService.findAllByTeam(team);
 
         model.addAttribute("link", link);
         model.addAttribute("user", user);
@@ -47,6 +50,8 @@ public class MainController {
         model.addAttribute("todos", todos);
         model.addAttribute("techs", techs);
         model.addAttribute("boards", boards);
+        model.addAttribute("awards", awards);
+
         return "/main/main";
     }
 
@@ -163,6 +168,18 @@ public class MainController {
         Board board = boardService.findBoardById(boardId);
         boardService.boardDelete(board);
         return "redirect:/main#board";
+    }
+
+
+
+    // Award 추가
+    @PostMapping("/main/{teamId}/award/add")
+    public String awardAdd(@PathVariable("teamId") Integer teamId , String award) {
+        System.out.println("작동테스트");
+        Team team = teamService.findById(teamId);
+        awardService.saveAward(award, team);
+
+        return "redirect:/main#awards";
     }
 }
 
