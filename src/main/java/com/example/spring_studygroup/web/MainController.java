@@ -175,7 +175,6 @@ public class MainController {
     // Award 추가
     @PostMapping("/main/{teamId}/award/add")
     public String awardAdd(@PathVariable("teamId") Integer teamId , String award) {
-        System.out.println("작동테스트");
         Team team = teamService.findById(teamId);
         awardService.saveAward(award, team);
 
