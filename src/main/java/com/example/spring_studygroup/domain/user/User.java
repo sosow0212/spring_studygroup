@@ -2,6 +2,7 @@ package com.example.spring_studygroup.domain.user;
 
 import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.board.Board;
+import com.example.spring_studygroup.domain.comment.Comment;
 import com.example.spring_studygroup.domain.team.Team;
 import lombok.*;
 
@@ -31,11 +32,14 @@ public class User {
 
     private String role; // 권한
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "user")
     private List<Link> links = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Board> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments = new ArrayList<>();
 
     private LocalDateTime createDate; // 날짜
 

@@ -149,6 +149,7 @@
     <hr class="m-0"/>
 
 
+<!--   Board -->
     <section class="resume-section" id="board">
         <div class="resume-section-content">
             <h2 class="mb-5">게시판</h2>
@@ -175,7 +176,8 @@
                             <div class="background">
                                 <div class="window">
                                     <div class="popup">
-                                        <div class="col-md-8">
+
+                                        <div class="container">
                                             <div class="d-flex flex-column comment-section">
                                                 <div class="bg-white p-2">
                                                     <div class="d-flex flex-row user-info mb-3">
@@ -223,19 +225,24 @@
                                                     </div>
 
                                                     <hr>
-                                                    <!--      댓글         -->
-                                                    <!--                                                            <div class="d-flex flex-row align-items-start"-->
-                                                    <!--                                                                 th:each="comment : ${comments}">-->
-                                                    <!--                                                                <div class="mt-2">-->
-                                                    <!--                                                                    <hr>-->
-                                                    <!--                                                                    <p class="comment-text"-->
-                                                    <!--                                                                       th:text="${comment.getUser().getName()}">댓글 작성자</p>-->
-                                                    <!--                                                                    <p class="comment-text"-->
-                                                    <!--                                                                       th:text="${comment.getCreateDate()}">댓글 날짜</p>-->
-                                                    <!--                                                                    <p class="comment-text" th:text="${comment.getText()}">-->
-                                                    <!--                                                                        댓글 내용</p>-->
-                                                    <!--                                                                </div>-->
-                                                    <!--                                                            </div>-->
+                                                    <!-- 댓글 -->
+                                                    <section class="mb-5">
+                                                        <div class="card bg-light">
+                                                            <div class="card-body">
+                                                                <!-- Comment form-->
+                                                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                                                <!-- Comment with nested comments-->
+                                                                <div class="d-flex mb-4">
+                                                                    <!-- Parent comment-->
+                                                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                                                                    <div class="ms-3">
+                                                                        <div class="fw-bold">댓글 작성자 명</div>
+                                                                        <span>댓글 내용</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
                                                 </div>
                                             </div>
                                         </div>
