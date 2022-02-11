@@ -4,6 +4,7 @@ import com.example.spring_studygroup.config.auth.PrincipalDetails;
 import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.award.Award;
 import com.example.spring_studygroup.domain.board.Board;
+import com.example.spring_studygroup.domain.comment.Comment;
 import com.example.spring_studygroup.domain.introStudy.IntroStudy;
 import com.example.spring_studygroup.domain.team.Team;
 import com.example.spring_studygroup.domain.tech.Tech;
@@ -25,6 +26,7 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    private final UserService userService;
     private final LinkService linkService;
     private final TeamService teamService;
     private final IntroStudyService introStudyService;
@@ -32,6 +34,7 @@ public class MainController {
     private final TechService techService;
     private final BoardService boardService;
     private final AwardService awardService;
+    private final CommentService commentService;
 
     @GetMapping("/main")
     public String mainPage(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
@@ -125,6 +128,10 @@ public class MainController {
     }
 
 
+
+
+
+
     // 게시글 업로드 페이지
     @GetMapping("/main/board/write/{teamId}")
     public String boardWritePage(@PathVariable("teamId") Integer teamId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
@@ -167,6 +174,18 @@ public class MainController {
     public String boardDelete(@PathVariable("boardId") Integer boardId) {
         Board board = boardService.findBoardById(boardId);
         boardService.boardDelete(board);
+        return "redirect:/main#board";
+    }
+
+
+
+    // 게시글 댓글 comment add
+    @PostMapping("/main/board/{boardId}/comment/{userId}")
+    public String addComment(@PathVariable("boardId") Integer boardId, @PathVariable("userId") Integer userId, String text) {
+        Board board = boardService.findBoardById(boardId);
+        User user = userService.findById(userId);
+
+        commentService.saveComment(user, board, text);
         return "redirect:/main#board";
     }
 

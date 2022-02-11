@@ -1,6 +1,7 @@
 package com.example.spring_studygroup.domain.comment;
 
 import com.example.spring_studygroup.domain.board.Board;
+import com.example.spring_studygroup.domain.team.Team;
 import com.example.spring_studygroup.domain.user.User;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,6 +28,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 
     private String text;
 
