@@ -198,7 +198,7 @@
 
                                                 <div class="bg-light p-2">
                                                     <form id="commentForm" class="d-flex flex-row align-items-start"
-                                                          th:action="@{/board/{boardId}/comment/{userId}(boardId=${board.id}, userId=${user.id})}"
+                                                          th:action="@{/main/{teamId}/board/{boardId}/comment/{userId}(teamId=${team.id}, boardId=${board.id}, userId=${user.id})}"
                                                           method="post">
                                                         <img class="rounded-circle"
                                                              src="https://i.imgur.com/RpzrMR2.jpg" width="40">
@@ -217,13 +217,13 @@
                                                     <!-- 댓글 -->
                                                     <section class="mb-5">
                                                         <div class="card bg-light">
-                                                            <div class="card-body">
-                                                                <div class="d-flex mb-4">
+                                                            <div class="card-body" th:each="comment : ${comments}">
+                                                                <div class="d-flex mb-4" th:if="${comment.getBoard() == board}">
                                                                     <!-- Parent comment-->
                                                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
                                                                     <div class="ms-3">
-                                                                        <div class="fw-bold">댓글 작성자 명</div>
-                                                                        <span>댓글 내용</span>
+                                                                        <div class="fw-bold" th:text="${comment.getUser().name}">댓글 작성자 명</div>
+                                                                        <span th:text="${comment.getText()}">댓글 내용</span>
                                                                     </div>
                                                                 </div>
                                                             </div>

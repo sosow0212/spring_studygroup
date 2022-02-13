@@ -46,6 +46,7 @@ public class MainController {
         List<Tech> techs = techService.loadTechs(team);
         List<Board> boards = boardService.findAllBoardByTeam(team);
         List<Award> awards = awardService.findAllByTeam(team);
+        List<Comment> comments = commentService.findAllCommentByTeamId(team.getId());
 
         model.addAttribute("link", link);
         model.addAttribute("user", user);
@@ -54,6 +55,7 @@ public class MainController {
         model.addAttribute("techs", techs);
         model.addAttribute("boards", boards);
         model.addAttribute("awards", awards);
+        model.addAttribute("comments", comments);
 
         return "/main/main";
     }
@@ -180,12 +182,14 @@ public class MainController {
 
 
     // 게시글 댓글 comment add
-    @PostMapping("/main/board/{boardId}/comment/{userId}")
-    public String addComment(@PathVariable("boardId") Integer boardId, @PathVariable("userId") Integer userId, String text) {
+    @PostMapping("/main/{teamId}/board/{boardId}/comment/{userId}")
+    public String addComment(@PathVariable("teamId") Integer teamId ,@PathVariable("boardId") Integer boardId, @PathVariable("userId") Integer userId, String text) {
+        System.out.println(text);
+
         Board board = boardService.findBoardById(boardId);
         User user = userService.findById(userId);
 
-        commentService.saveComment(user, board, text);
+        commentService.saveComment(user, board, text, teamId);
         return "redirect:/main#board";
     }
 

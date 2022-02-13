@@ -29,8 +29,9 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     private String text;
+
+    private int teamId;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate createDate; // 날짜
