@@ -3,7 +3,6 @@ package com.example.spring_studygroup.domain.user;
 import com.example.spring_studygroup.domain.Link.Link;
 import com.example.spring_studygroup.domain.board.Board;
 import com.example.spring_studygroup.domain.comment.Comment;
-import com.example.spring_studygroup.domain.team.Team;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +30,9 @@ public class User {
     private String phone;
 
     private String role; // 권한
+
+    private String filename;
+    private String filepath;
 
     @OneToMany(mappedBy = "user")
     private List<Link> links = new ArrayList<>();
