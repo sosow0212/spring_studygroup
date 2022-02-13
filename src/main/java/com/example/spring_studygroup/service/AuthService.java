@@ -78,5 +78,23 @@ public class AuthService {
         linkRepository.save(link);
         User userEntity = userRepository.save(user);
     }
+
+    public void editUser(int userId ,User user, MultipartFile file) throws Exception {
+        User before = userRepository.findById(userId);
+
+        before.setName(user.getName());
+        before.setEmail(user.getEmail());
+        before.setPhone(user.getPhone());
+
+        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files/";
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
+        before.setFilename(fileName);
+        before.setFilepath("/files/" + fileName);
+        userRepository.save(before);
+    }
 }
 
